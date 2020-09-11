@@ -8,3 +8,6 @@
 
 Spree::Core::Engine.load_seed if defined?(Spree::Core)
 Spree::Auth::Engine.load_seed if defined?(Spree::Auth)
+        
+
+SolidusAvataxCertified::Engine.load_seed if defined?(SolidusAvataxCertified::Engine)

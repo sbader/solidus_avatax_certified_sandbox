@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_11_161672) do
+ActiveRecord::Schema.define(version: 2020_09_11_161932) do
 
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
@@ -135,6 +135,20 @@ ActiveRecord::Schema.define(version: 2020_09_11_161672) do
     t.datetime "updated_at", precision: 6
     t.index ["viewable_id"], name: "index_assets_on_viewable_id"
     t.index ["viewable_type", "type"], name: "index_assets_on_viewable_type_and_type"
+  end
+
+  create_table "spree_avalara_entity_use_codes", force: :cascade do |t|
+    t.string "use_code"
+    t.string "use_code_description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "spree_avalara_transactions", force: :cascade do |t|
+    t.integer "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_spree_avalara_transactions_on_order_id"
   end
 
   create_table "spree_calculators", force: :cascade do |t|
@@ -1118,6 +1132,10 @@ ActiveRecord::Schema.define(version: 2020_09_11_161672) do
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.string "exemption_number"
+    t.integer "avalara_entity_use_code_id"
+    t.string "vat_id"
+    t.index ["avalara_entity_use_code_id"], name: "index_spree_users_on_avalara_entity_use_code_id"
     t.index ["deleted_at"], name: "index_spree_users_on_deleted_at"
     t.index ["email"], name: "email_idx_unique", unique: true
     t.index ["reset_password_token"], name: "index_spree_users_on_reset_password_token_solidus_auth_devise", unique: true
